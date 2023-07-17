@@ -15,7 +15,10 @@ public class SinglyLinkedList {
         list.head = list.removeDuplicates();
         list.print();
         list.head = list.insertSorted(8);
+        System.out.print("Aqui: ");
+        list.deleteNode(9);
         list.print();
+
     }
     private ListNode head;
     private static class ListNode {
@@ -96,13 +99,13 @@ public class SinglyLinkedList {
         return current;
     }
 
-    public void delete(int position){
-        if(head.data == 1){
+    public void delete(int position) {
+        if(head.data == 1) {
             head = head.next;
-        } else{
+        } else {
             ListNode previous = head;
             int count = 1;
-            while(count < position -1){
+            while(count < position -1) {
                 count++;
                 previous = previous.next;
             }
@@ -110,13 +113,13 @@ public class SinglyLinkedList {
             previous.next = current.next;
         }
     }
-    public boolean hasNode(ListNode head, int target){
-        if(head == null){
+    public boolean hasNode(ListNode head, int target) {
+        if(head == null) {
             return false;
         }
         ListNode current = head;
-        while(current.next != null){
-            if(current.data == target){
+        while(current.next != null) {
+            if(current.data == target) {
                 return true;
             }
             current = current.next;
@@ -124,14 +127,14 @@ public class SinglyLinkedList {
         return false;
     }
 
-    public ListNode reverse(ListNode head){
-        if(head == null){
+    public ListNode reverse(ListNode head) {
+        if(head == null) {
             return head;
         }
         ListNode current = head;
         ListNode previous = null;
         ListNode next = null;
-        while (current != null){
+        while (current != null) {
             next = current.next;
             current.next = previous;
             previous = current;
@@ -140,71 +143,89 @@ public class SinglyLinkedList {
         return previous;
     }
 
-    public ListNode middleNode(){
-        if (head == null){
+    public ListNode middleNode() {
+        if (head == null) {
             return null;
         }
         ListNode slowNode = head;
         ListNode fastNode = head;
-        while(slowNode != null && fastNode.next != null){
+        while(slowNode != null && fastNode.next != null) {
             slowNode = slowNode.next;
             fastNode = fastNode.next.next;
         }
         return slowNode;
     }
 
-    public ListNode getNthNodeFromEnd(int n){
-        if(head == null){
+    public ListNode getNthNodeFromEnd(int n) {
+        if(head == null) {
             return null;
         }
-        if(n <= 0){
+        if(n <= 0) {
             throw new IllegalArgumentException( n + " is an invalid value.");
         }
         ListNode mainPtr = head;
         ListNode refPtr = head;
         int count = 0;
-        while (count < n){
-            if(refPtr == null){
+        while (count < n) {
+            if(refPtr == null) {
                 throw new IllegalArgumentException(n + " is greater than number of nodes in list.");
             }
             refPtr = refPtr.next;
             count++;
         }
-        while(refPtr != null){
+        while(refPtr != null) {
             refPtr = refPtr.next;
             mainPtr = mainPtr.next;
         }
         return mainPtr;
     }
-    public ListNode removeDuplicates(){
+    public ListNode removeDuplicates() {
         // TODO I need to verify why this algorithm does not work.
-        if(head == null){
+        if(head == null) {
             return null;
         }
         ListNode current = head;
-        while (current != null && current.next != null){
-            if (current.data == current.next.data){
+        while (current != null && current.next != null) {
+            if (current.data == current.next.data) {
                 current.next = current.next.next;
-            }else{
+            } else {
                 current = current.next;
             }
         }
         return head;
     }
-    public ListNode insertSorted(int value){
+    public ListNode insertSorted(int value) {
         ListNode newNode = new ListNode(value);
-        if(head == null){
+        if(head == null) {
             return newNode;
         }
         ListNode current = head;
         ListNode temp = null;
 
-        while (current != null && current.data < newNode.data){
+        while (current != null && current.data < newNode.data) {
             temp = current;
             current = current.next;
         }
         newNode.next = current;
         temp.next = newNode;
         return head;
+    }
+
+    public void deleteNode(int value) {
+        ListNode current = head;
+        ListNode previous = null;
+        if (current != null && current.data == value) {
+            head = current.next;
+            return;
+        }
+        while (current != null && current.data != value) {
+            previous = current;
+            current = current.next;
+        }
+
+        if (current == null) {
+            return;
+        }
+        previous.next = current.next;
     }
 }
