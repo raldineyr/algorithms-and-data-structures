@@ -1,24 +1,9 @@
 public class SinglyLinkedList {
 
     public static void main(String[] args) {
-        SinglyLinkedList list = new SinglyLinkedList();
-        list.head = new ListNode(9);
-        list.insertFirst(7);
-        list.insertFirst(6);
-        list.insertFirst(5);
-        list.insertFirst(4);
-        list.insertFirst(3);
-        list.insertFirst(2);
-        list.insertFirst(1);
-        list.insertFirst(0);
-        list.print();
-        list.head = list.removeDuplicates();
-        list.print();
-        list.head = list.insertSorted(8);
-        System.out.print("Aqui: ");
-        list.deleteNode(9);
-        list.print();
-
+        SinglyLinkedList singlyList = new SinglyLinkedList();
+        singlyList.createALoopInLinkedList();
+        System.out.println("Here: " + singlyList.hasLoop());
     }
     private ListNode head;
     private static class ListNode {
@@ -227,5 +212,34 @@ public class SinglyLinkedList {
             return;
         }
         previous.next = current.next;
+    }
+    public boolean hasLoop() {
+        ListNode fastPtr = head;
+        ListNode slowPtr = head;
+
+        while (fastPtr != null && fastPtr.next != null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+            if(slowPtr.equals(fastPtr)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void createALoopInLinkedList() {
+        ListNode first = new ListNode(1);
+        ListNode second = new ListNode(2);
+        ListNode third = new ListNode(3);
+        ListNode fourth = new ListNode(4);
+        ListNode firth = new ListNode(5);
+        ListNode sixth = new ListNode(6);
+
+        head = first;
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = firth;
+        firth.next = sixth;
+        sixth.next = third;
     }
 }
