@@ -265,4 +265,25 @@ public class SinglyLinkedList {
         }
         return temp;
     }
+
+    public ListNode merged (ListNode listnode1, ListNode listnode2) {
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        while (listnode1 != null && listnode2 != null) {
+            if (listnode1.data <= listnode2.data) {
+                tail.next = listnode1;
+                listnode1 = listnode1.next;
+            } else {
+                tail.next = listnode2;
+                listnode2 = listnode2.next;
+            }
+            tail = tail.next;
+        }
+        if (listnode1 == null) {
+            tail.next = listnode2;
+        } else {
+            tail.next = listnode1;
+        }
+        return dummy.next;
+    }
 }
