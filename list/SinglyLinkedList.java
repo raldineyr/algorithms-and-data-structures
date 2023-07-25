@@ -1,9 +1,24 @@
 public class SinglyLinkedList {
 
     public static void main(String[] args) {
+        ListNode first = new ListNode(1);
+        ListNode second = new ListNode(2);
+        ListNode third = new ListNode(3);
+
+        first.next = second;
+        second.next = third;
+
+        ListNode fourth = new ListNode(4);
+        ListNode firth = new ListNode(5);
+        ListNode sixth = new ListNode(6);
+
+        fourth.next = firth;
+        firth.next = sixth;
+
         SinglyLinkedList singlyList = new SinglyLinkedList();
-        singlyList.createALoopInLinkedList();
-        System.out.println("Here: " + singlyList.hasLoop());
+        SinglyLinkedList singlyAddedList = new SinglyLinkedList();
+        singlyAddedList.head = singlyList.add(first,fourth);
+        singlyAddedList.print();
     }
     private ListNode head;
     private static class ListNode {
@@ -283,6 +298,26 @@ public class SinglyLinkedList {
             tail.next = listnode2;
         } else {
             tail.next = listnode1;
+        }
+        return dummy.next;
+    }
+
+    public ListNode add(ListNode list1, ListNode list2){
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        int carry = 0;
+        while (list1 != null || list2 != null) {
+            int x = (list1 != null) ? list1.data : 0;
+            int y = (list2 != null) ? list2.data : 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            tail.next = new ListNode(sum % 10);
+            tail = tail.next;
+            if (list1 != null) list1 = list1.next;
+            if (list2 != null) list2 = list2.next;
+        }
+        if(carry > 0){
+            tail.next = new ListNode(carry);
         }
         return dummy.next;
     }
