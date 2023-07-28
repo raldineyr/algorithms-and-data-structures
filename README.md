@@ -1,3 +1,5 @@
+Algorithms and data structure course by Dinesh Varyani Google Enginner.
+
 [Roadmap.sh](https://roadmap.sh/computer-science)
 
 [Exercícios](https://github.com/raldineyr/leetCode)
