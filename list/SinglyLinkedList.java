@@ -81,7 +81,7 @@ public class SinglyLinkedList {
         ListNode temp = head;
         head = head.next;
         temp.next = null;
-        return head;
+        return temp;
     }
 
     public ListNode deleteLast() {
