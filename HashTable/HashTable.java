@@ -3,7 +3,9 @@ public class HashTable {
         HashTable table = new HashTable(10);
         table.put(105,"RALDINEY");
         table.put(21,"MARIO");
+        table.get(21);
         System.out.println(table.size());
+        System.out.println(table.get(105));
     }
     private HashNode[] buckets;
     private int numOfBuckets;
@@ -30,8 +32,13 @@ public class HashTable {
     public int size(){
         return size;
     }
+
     public boolean isEmpty(){
         return size == 0;
+    }
+
+    public int getBucketIndex(Integer key){
+        return key % numOfBuckets;
     }
 
     public void put(Integer key, String value){
@@ -54,7 +61,18 @@ public class HashTable {
         buckets[bucketIndex] = node;
     }
 
-    public int getBucketIndex(Integer key){
-        return key % numOfBuckets;
+    public String get(Integer key){
+        if(key == null ){
+            throw new IllegalArgumentException("A chave não pode ser nula!");
+        }
+        int bucketIndex = getBucketIndex(key);
+        HashNode head = buckets[bucketIndex];
+        while (head != null){
+            if(head.key.equals(key)){
+                return head.value;
+            }
+            head = head.next;
+        }
+        return null;
     }
 }
