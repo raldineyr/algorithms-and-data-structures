@@ -5,6 +5,7 @@ public class BinaryTree {
         BinaryTree binarytree = new BinaryTree();
         binarytree.createBinaryTree();
         binarytree.preOrderIterate(binarytree.root);
+        binarytree.inOrderRecursive(binarytree.root);
     }
     private TreeNode root;
 
@@ -50,6 +51,12 @@ public class BinaryTree {
                 stack.push(temp.left);
             }
         }
+    }
+       public void inOrderRecursive(TreeNode root){
+        if(root == null){ return;}
+        inOrderRecursive(root.left);
+        System.out.println(root.data);
+        inOrderRecursive(root.right);
     }
 }
 
