@@ -76,5 +76,14 @@ public class BinaryTree {
             }
         }
     }
+
+        public void posOrderRecursive(TreeNode root){
+        if(root == null){return;}
+        posOrderRecursive(root.left);
+        posOrderRecursive(root.right);
+        System.out.print(root.data + " ");
+    }
+}
+
 }
 
